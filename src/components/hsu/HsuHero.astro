@@ -1,0 +1,45 @@
+---
+import type { ImageMetadata } from 'astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+
+interface Props {
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+  image?: {
+    src: string | ImageMetadata | null;
+    alt?: string;
+  };
+  actions?: Array<{
+    text: string;
+    href: string;
+    variant?: 'primary' | 'secondary';
+    icon?: string;
+  }>;
+}
+
+const { tagline, title, subtitle, image, actions } = Astro.props;
+---
+
+<Hero2
+  tagline={tagline}
+  image={image}
+  actions={actions}
+  bg='<div class="absolute inset-0 bg-white dark:bg-transparent"></div>'
+>
+  {
+    title && (
+      <Fragment slot="title">
+        <span set:html={title} />
+      </Fragment>
+    )
+  }
+  {
+    subtitle && (
+      <Fragment slot="subtitle">
+        <span set:html={subtitle} />
+      </Fragment>
+    )
+  }
+  <slot slot="content" />
+</Hero2>

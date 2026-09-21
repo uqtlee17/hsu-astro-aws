@@ -1,0 +1,86 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
+import type { Steps as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  items = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div class="flex flex-col gap-6 md:gap-8">
+    <div class="w-full text-center">
+      <Headline
+        title={title}
+        subtitle={subtitle}
+        tagline={tagline}
+        classes={{
+          container: 'mb-6 md:mb-10',
+          title: 'text-3xl lg:text-4xl',
+          ...((classes?.headline as object) ?? {}),
+        }}
+      />
+    </div>
+    
+    {items && items.length > 0 && (
+      <div class="relative max-w-6xl mx-auto py-2 w-full">
+        {/* Central Vertical Line (Desktop only) */}
+        <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-black/10 dark:bg-slate-400/50 transform -translate-x-1/2 hidden md:block"></div>
+        
+        {items.map(({ title, description, icon }, index = 0) => {
+          const isEven = index % 2 === 0;
+          return (
+            <div class="flex flex-col md:flex-row items-center justify-between w-full mb-0 relative intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              
+              {/* Left side (Content for even, empty for odd) */}
+              <div class={`w-full md:w-[45%] ${isEven ? 'text-center md:text-right md:pr-8' : 'hidden md:block'}`}>
+                {isEven && (
+                  <div class="py-2 md:py-4">
+                    {title && <p class="text-base sm:text-lg font-bold font-heading mb-1 text-slate-800 dark:text-slate-100" set:html={title} />}
+                    {description && (
+                      <p class="text-sm text-muted dark:text-slate-400" set:html={description} />
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Center Icon */}
+              <div class="z-10 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 my-2 md:my-0 bg-blue-50 dark:bg-slate-900 rounded-full border-2 border-primary/50 mx-auto md:mx-0 shadow-sm relative shrink-0">
+                  {icon && (
+                    <Icon
+                      name={icon}
+                      class="w-5 h-5 text-primary"
+                    />
+                  )}
+                  {/* Mobile line connection */}
+                  {index !== items.length - 1 && <div class="absolute top-[2.5rem] bottom-[-0.5rem] left-1/2 w-0.5 bg-black/10 dark:bg-slate-400/50 transform -translate-x-1/2 md:hidden"></div>}
+              </div>
+
+              {/* Right side (Content for odd, empty for even) */}
+              <div class={`w-full md:w-[45%] ${!isEven ? 'text-center md:text-left md:pl-8' : 'hidden md:block'}`}>
+                {!isEven && (
+                  <div class="py-2 md:py-4">
+                    {title && <p class="text-base sm:text-lg font-bold font-heading mb-1 text-slate-800 dark:text-slate-100" set:html={title} />}
+                    {description && (
+                      <p class="text-sm text-muted dark:text-slate-400" set:html={description} />
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</WidgetWrapper>

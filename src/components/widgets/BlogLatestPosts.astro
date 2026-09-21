@@ -1,0 +1,65 @@
+---
+import { APP_BLOG } from 'astrowind:config';
+
+import Item from '~/components/blog/GridItem.astro';
+
+import { getBlogPermalink } from '~/utils/permalinks';
+import { findLatestPosts } from '~/utils/blog';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+import Button from '~/components/ui/Button.astro';
+
+export interface Props extends Widget {
+  title?: string;
+  tagline?: string;
+  linkText?: string;
+  linkUrl?: string | URL;
+  information?: string;
+  count?: number;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  tagline = await Astro.slots.render('tagline'),
+  linkText = 'View all posts',
+  linkUrl = getBlogPermalink(),
+  information = await Astro.slots.render('information'),
+  count = 3,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
+---
+
+{
+  APP_BLOG.isEnabled ? (
+    <WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string} bg={bg}>
+      <Headline title={title} subtitle={information} tagline={tagline} />
+
+      {posts.length > 0 && (
+        <div class="grid gap-6 md:grid-cols-3">
+          {posts.map((post) => (
+            <div class="md:col-span-1">
+              <Item post={post} />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {APP_BLOG.list.isEnabled && linkText && linkUrl && (
+        <div class="flex justify-center mt-8 md:mt-10">
+          <Button variant="primary" href={linkUrl}>
+            {linkText} &rarr;
+          </Button>
+        </div>
+      )}
+    </WidgetWrapper>
+  ) : (
+    <Fragment />
+  )
+}

@@ -1,0 +1,23 @@
+---
+import { SITE } from 'astrowind:config';
+---
+
+<div class="flex items-center gap-3 sm:gap-4 py-1">
+  <!-- UQ Logo -->
+  <img
+    src="https://www.drupal.org/files/uq.png"
+    alt="The University of Queensland"
+    class="h-10 sm:h-12 md:h-14 w-auto object-contain shrink-0 transition-transform duration-200 hover:scale-105"
+  />
+
+  <!-- Clean Vertical Divider -->
+  <div class="h-8 sm:h-10 md:h-11 w-[1.5px] bg-slate-300 dark:bg-slate-700 shrink-0"></div>
+
+  <!-- HSU Logo -->
+  <img
+    src="https://hsu.imb.uq.edu.au/sites/default/files/HSU_logo_0.png"
+    alt={SITE?.name || 'Human Studies Unit'}
+    class="h-9 sm:h-11 md:h-13 w-auto object-contain shrink-0 transition-transform duration-200 hover:scale-105 brightness-0 dark:invert"
+  />
+</div>
+

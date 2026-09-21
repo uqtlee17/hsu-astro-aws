@@ -1,0 +1,121 @@
+---
+import PublicationCard, { type Publication } from './PublicationCard.astro';
+
+interface Props {
+  items: Publication[];
+  limit?: number;
+  featuredOnly?: boolean;
+  showFilters?: boolean;
+  variant?: 'full' | 'compact';
+}
+
+const { items = [], limit, featuredOnly = false, showFilters = false, variant = 'full' } = Astro.props;
+
+let filteredItems = featuredOnly ? items.filter((p) => p.isFeatured) : [...items];
+filteredItems = filteredItems.sort((a, b) => b.year - a.year);
+if (limit && limit > 0) {
+  filteredItems = filteredItems.slice(0, limit);
+}
+
+const uniqueTags = [...new Set(filteredItems.flatMap((p) => p.tags))].sort();
+const years = [...new Set(filteredItems.map((p) => p.year))].sort((a, b) => b - a);
+
+const groupedPubs = years.map((year) => ({
+  year,
+  items: filteredItems.filter((p) => p.year === year),
+}));
+---
+
+{
+  showFilters && (
+    <div class="flex flex-wrap gap-3 mb-12 justify-center" id="tag-filters">
+      <button
+        class="filter-btn active px-5 py-2 rounded-full bg-primary text-white shadow-md text-sm font-medium transition-all duration-300"
+        data-tag="all"
+      >
+        All Publications
+      </button>
+      {uniqueTags.map((tag) => (
+        <button
+          class="filter-btn px-5 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 shadow-sm text-sm font-medium transition-all duration-300"
+          data-tag={tag}
+        >
+          {tag.charAt(0).toUpperCase() + tag.slice(1)}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+{
+  variant === 'compact' ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {filteredItems.map((pub) => (
+        <PublicationCard pub={pub} variant="compact" />
+      ))}
+    </div>
+  ) : (
+    <div id="publications-list">
+      {groupedPubs.map((group) => (
+        <div class="year-group mb-12">
+          <h3 class="text-2xl font-bold mb-6 text-heading border-b border-gray-200 dark:border-slate-800 pb-2">
+            {group.year}
+          </h3>
+          <ul class="space-y-6">
+            {group.items.map((pub) => (
+              <PublicationCard pub={pub} variant="full" />
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const pubItems = document.querySelectorAll('.pub-item');
+    const yearGroups = document.querySelectorAll('.year-group');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => {
+          b.classList.remove('bg-primary', 'text-white', 'shadow-md');
+          b.classList.add('bg-slate-100', 'text-slate-700', 'shadow-sm', 'dark:bg-slate-800', 'dark:text-slate-300');
+        });
+
+        btn.classList.remove('bg-slate-100', 'text-slate-700', 'shadow-sm', 'dark:bg-slate-800', 'dark:text-slate-300');
+        btn.classList.add('bg-primary', 'text-white', 'shadow-md');
+
+        const tag = btn.getAttribute('data-tag');
+
+        pubItems.forEach((item) => {
+          const itemElement = item as HTMLElement;
+          if (tag === 'all') {
+            itemElement.style.display = 'block';
+          } else {
+            const tags = itemElement.getAttribute('data-tags')?.split(',') || [];
+            if (tag && tags.includes(tag)) {
+              itemElement.style.display = 'block';
+            } else {
+              itemElement.style.display = 'none';
+            }
+          }
+        });
+
+        yearGroups.forEach((group) => {
+          const groupElement = group as HTMLElement;
+          let hasVisible = false;
+          groupElement.querySelectorAll('.pub-item').forEach((i) => {
+            const itemElement = i as HTMLElement;
+            if (itemElement.style.display !== 'none') {
+              hasVisible = true;
+            }
+          });
+          groupElement.style.display = hasVisible ? 'block' : 'none';
+        });
+      });
+    });
+  });
+</script>

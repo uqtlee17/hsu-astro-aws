@@ -1,0 +1,68 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface CapabilityItem {
+  id?: string;
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+interface Props {
+  id?: string;
+  items: CapabilityItem[];
+  columns?: 2 | 3 | 4;
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  class?: string;
+}
+
+const { id, items = [], columns = 3, title, subtitle, tagline, class: className = '' } = Astro.props;
+
+const gridCols =
+  columns === 2
+    ? 'grid-cols-1 md:grid-cols-2'
+    : columns === 4
+      ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+---
+
+<section id={id} class={`relative py-10 md:py-14 ${className}`}>
+  {
+    (title || tagline || subtitle) && (
+      <div class="text-center max-w-3xl mx-auto mb-10 px-4">
+        {tagline && (
+          <p class="text-xs sm:text-sm text-secondary dark:text-blue-200 font-bold tracking-wide uppercase mb-2">
+            {tagline}
+          </p>
+        )}
+        {title && (
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-heading leading-tight tracking-tight">
+            {title}
+          </h2>
+        )}
+        <div class="w-16 h-1 bg-primary mx-auto my-4 rounded-full" />
+        {subtitle && <p class="text-muted text-sm sm:text-base">{subtitle}</p>}
+      </div>
+    )
+  }
+
+  <div class={`max-w-6xl mx-auto px-4 sm:px-6 grid gap-6 ${gridCols}`}>
+    {
+      items.map((item) => (
+        <div class="p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div>
+            {item.icon && (
+              <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary flex items-center justify-center mb-4">
+                <Icon name={item.icon} class="w-6 h-6" />
+              </div>
+            )}
+            <h3 class="text-xl font-bold mb-2 text-heading">{item.title}</h3>
+            <p class="text-slate-800 dark:text-slate-200 text-sm leading-relaxed">{item.description}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

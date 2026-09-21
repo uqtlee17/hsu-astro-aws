@@ -1,0 +1,138 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+}
+
+const {
+  title = 'Supporting Research from People to Data',
+  subtitle = 'A decade of operational scale supporting clinical cohorts, digital data capture, and certified biobanking.',
+  tagline = 'OPERATIONAL SCALE & PIPELINE',
+} = Astro.props;
+
+const pipelineStages = [
+  {
+    step: '01',
+    stageName: 'Cohorts & Participants',
+    category: 'Intake & Clinical Engagement',
+    icon: 'tabler:users-group',
+    color: 'from-blue-600 to-sky-500',
+    metrics: [
+      { amount: '27,332+', label: 'Participant Registrations', icon: 'tabler:user-check' },
+      { amount: '6,367+', label: 'Clinical Visits', icon: 'tabler:stethoscope' },
+      { amount: '65+', label: 'Active Collaborations', icon: 'tabler:affiliate' },
+    ],
+    description: 'Direct cohort recruitment, nationwide sample collection kit distribution, and participant engagement.',
+  },
+  {
+    step: '02',
+    stageName: 'Surveys & Data Capture',
+    category: 'Digital Research Portals',
+    icon: 'tabler:clipboard-data',
+    color: 'from-teal-600 to-emerald-500',
+    metrics: [
+      { amount: '8,366+', label: 'Surveys Completed', icon: 'tabler:forms' },
+      { amount: '100%', label: 'Encrypted De-Identification', icon: 'tabler:lock-check' },
+    ],
+    description: 'Secure online questionnaire platforms, dynamic e-consent, and longitudinal phenotypic data collection.',
+  },
+  {
+    step: '03',
+    stageName: 'Laboratory & Bio-Repository',
+    category: 'Wet Lab, Genomics & Biobanking',
+    icon: 'tabler:dna-2',
+    color: 'from-indigo-600 to-blue-600',
+    metrics: [
+      { amount: '24,641+', label: 'Samples Processed', icon: 'tabler:flask' },
+      { amount: '25,054+', label: 'DNA Samples Extracted', icon: 'tabler:microscope' },
+      { amount: '174,334+', label: 'Tubes Stored (-196°C Biobank)', icon: 'tabler:snowflake' },
+      { amount: '22,140+', label: 'Genetic Screens', icon: 'tabler:binary-tree' },
+    ],
+    description: 'CTRNet-certified robotic extraction, vapor-phase LN2 cryogenic archiving, and array screening logistics.',
+  },
+];
+---
+
+<section class="relative py-10 md:py-14 bg-gradient-to-b from-white via-blue-50/50 to-white dark:from-slate-900 dark:via-slate-800/60 dark:to-slate-900 overflow-hidden" id="stats-pipeline">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      {tagline && (
+        <p class="text-xs sm:text-sm font-bold uppercase tracking-wider text-secondary dark:text-blue-300 mb-2">
+          {tagline}
+        </p>
+      )}
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-heading leading-tight mb-3">
+        {title}
+      </h2>
+      <div class="w-16 h-1 bg-primary mx-auto mb-4 rounded-full"></div>
+      <p class="text-muted dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Tree / Pipeline Flow Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
+      {pipelineStages.map((stage, idx) => (
+        <div class="relative flex flex-col justify-between bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-lg shadow-blue-100/50 dark:shadow-none border border-slate-200/80 dark:border-slate-700/60 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary/50 group">
+          <!-- Top Badge & Header -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class={`inline-flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-r ${stage.color} text-white font-bold text-xs shadow-md`}>
+                {stage.step}
+              </span>
+              <div class="flex items-center gap-1.5 text-[0.7rem] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider bg-slate-100 dark:bg-slate-700/60 px-2.5 py-1 rounded-full">
+                <Icon name={stage.icon} class="w-3.5 h-3.5 text-primary" />
+                {stage.category}
+              </div>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-bold font-heading text-heading mb-1.5 group-hover:text-primary transition-colors">
+              {stage.stageName}
+            </h3>
+            <p class="text-xs text-muted dark:text-slate-400 mb-5 leading-relaxed">
+              {stage.description}
+            </p>
+
+            <!-- Metrics List -->
+            <div class="space-y-2.5 pt-2 border-t border-slate-100 dark:border-slate-700/60">
+              {stage.metrics.map((metric) => (
+                <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700/30 border border-slate-100/80 dark:border-slate-700/40">
+                  <div class="flex items-center gap-2">
+                    <Icon name={metric.icon} class="w-4 h-4 text-primary shrink-0" />
+                    <span class="text-xs font-medium text-slate-700 dark:text-slate-300">
+                      {metric.label}
+                    </span>
+                  </div>
+                  <span class="font-heading font-bold text-sm sm:text-base text-primary dark:text-teal-300 whitespace-nowrap">
+                    {metric.amount}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Connecting step arrow for desktop -->
+          {idx < 2 && (
+            <div class="hidden lg:flex absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 pointer-events-none w-7 h-7 rounded-full bg-white dark:bg-slate-800 border-2 border-primary items-center justify-center shadow-md text-primary">
+              <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom summary note -->
+    <div class="mt-8 p-3.5 rounded-2xl bg-blue-50/70 dark:bg-slate-800/80 border border-blue-100 dark:border-slate-700 text-center flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-xs text-slate-700 dark:text-slate-300">
+      <div class="flex items-center gap-1.5 font-semibold text-secondary dark:text-blue-300">
+        <Icon name="tabler:certificate" class="w-4 h-4 text-primary" />
+        CTRNet Certified Biobanking Facility
+      </div>
+      <span class="hidden sm:inline text-slate-300 dark:text-slate-600">•</span>
+      <div>Strict ISO-aligned sample chain-of-custody tracking across all research stages.</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,67 @@
+---
+import type { Stats as Props } from '~/types';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import { Icon } from 'astro-icon/components';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  stats = [],
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div class="text-center max-w-3xl mx-auto mb-8 md:mb-10">
+    {tagline && (
+      <p class="text-xs sm:text-sm font-bold uppercase tracking-wider text-secondary dark:text-blue-300 mb-2">
+        {tagline}
+      </p>
+    )}
+    {title && (
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-heading leading-tight mb-3">
+        {title}
+      </h2>
+    )}
+    <div class="w-16 h-1 bg-primary mx-auto mb-4 rounded-full"></div>
+    {subtitle && (
+      <p class="text-muted dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+        {subtitle}
+      </p>
+    )}
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 sm:gap-y-12 text-center mt-6">
+    {
+      stats &&
+        stats.map(({ amount, title, icon, color }) => (
+          <div class="px-2 sm:px-4 py-2 text-center border-r border-slate-200 dark:border-slate-800 [&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r md:[&:nth-child(4n)]:border-r-0 flex flex-col items-center justify-center">
+            {icon && (
+              <div class="flex items-center justify-center mx-auto mb-3 text-primary">
+                <Icon name={icon} class="w-6 h-6 md:w-8 md:h-8" />
+              </div>
+            )}
+            {amount && (
+              <div
+                class:list={[
+                  'font-heading text-3xl font-bold tracking-tight mb-2',
+                  color || 'text-[#0090D0] dark:text-cyan-400',
+                ]}
+              >
+                {amount}
+              </div>
+            )}
+            {title && (
+              <div class="text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 leading-snug max-w-[140px] mx-auto">
+                {title}
+              </div>
+            )}
+          </div>
+        ))
+    }
+  </div>
+</WidgetWrapper>

@@ -1,0 +1,13 @@
+{
+  "name": "Human Studies Unit",
+  "shortName": "HSU",
+  "logo": "~/assets/images/default.png",
+  "theme": {
+    "primary": "rgb(0, 180, 216)",
+    "secondary": "rgb(8, 44, 92)",
+    "accent": "rgb(0, 180, 216)",
+    "textHeading": "rgb(8, 44, 92)",
+    "textDefault": "rgb(51, 65, 85)",
+    "textMuted": "rgb(100, 116, 139)"
+  }
+}

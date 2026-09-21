@@ -1,0 +1,49 @@
+---
+import '@fontsource-variable/inter';
+
+// We use Inter for a clean, modern institutional look
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: 'Inter Variable';
+    --aw-font-serif: 'Inter Variable';
+    --aw-font-heading: 'Inter Variable';
+
+    /* Novalab Medical / Tech Theme */
+    --aw-color-primary: rgb(0 180 216); /* Teal #00b4d8 */
+    --aw-color-secondary: rgb(8 44 92); /* Dark Blue #082c5c */
+    --aw-color-accent: rgb(0 180 216); /* Teal #00b4d8 */
+
+    --aw-color-text-heading: rgb(8 44 92); /* Dark Blue #082c5c */
+    --aw-color-text-default: rgb(51 65 85); /* Slate 700 */
+    --aw-color-text-muted: rgb(100 116 139); /* Slate 500 */
+    --aw-color-bg-page: rgb(255 255 255); /* White */
+
+    --aw-color-bg-page-dark: rgb(13 35 58); /* Top bar dark blue for dark mode */
+
+    ::selection {
+      background-color: rgba(0, 180, 216, 0.2);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: 'Inter Variable';
+    --aw-font-serif: 'Inter Variable';
+    --aw-font-heading: 'Inter Variable';
+
+    --aw-color-primary: rgb(45 212 191); /* Teal 400 */
+    --aw-color-secondary: rgb(56 189 248); /* Sky 400 */
+    --aw-color-accent: rgb(251 146 60); /* Orange 400 */
+
+    --aw-color-text-heading: rgb(248 250 252); /* Slate 50 */
+    --aw-color-text-default: rgb(203 213 225); /* Slate 300 */
+    --aw-color-text-muted: rgb(148 163 184); /* Slate 400 */
+    --aw-color-bg-page: rgb(15 23 42); /* Slate 900 */
+
+    ::selection {
+      background-color: rgba(45, 212, 191, 0.3);
+      color: white;
+    }
+  }
+</style>
