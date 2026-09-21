@@ -1,0 +1,128 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import hsuTeamImage from '~/assets/images/lab/HSU_TEAM.jpg';
+import defaultImg from '~/assets/images/default.png';
+
+const metadata = {
+  title: 'Our Team — Human Studies Unit (HSU)',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Section -->
+  <Hero2
+    image={{
+      src: hsuTeamImage,
+      alt: 'HSU Team',
+    }}
+    bg='<div class="absolute inset-0 bg-gradient-to-b from-blue-50/40 via-white to-transparent dark:from-slate-900/60 dark:via-slate-900 dark:to-transparent"></div>'
+  >
+    <Fragment slot="title">Our Team</Fragment>
+    <Fragment slot="subtitle">
+      <span class="block mb-2 mt-2 text-xl font-bold text-secondary dark:text-blue-300">
+        Meet the People Behind HSU
+      </span>
+      <p class="text-slate-800 dark:text-slate-200 text-base sm:text-lg leading-relaxed">
+        Our multidisciplinary team drives cutting‑edge research and innovation.
+      </p>
+    </Fragment>
+  </Hero2>
+
+  <!-- Leadership Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <h2 class="text-3xl font-bold mb-8">Leadership</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="flex items-center space-x-4">
+        <img src="https://yengolab.org/wp-content/uploads/2025/05/Anjali_Henders2_PREFERRED_wide-scaled-e1747894669419.jpg" alt="Anjali Henders" class="w-24 h-24 rounded-full object-cover"/>
+        <div>
+          <h3 class="text-xl font-semibold">Anjali Henders</h3>
+          <p class="text-sm text-muted">Human Studies Unit Leader</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <img src={hsuTeamImage.src} alt="Leanne" class="w-24 h-24 rounded-full object-cover"/>
+        <div>
+          <h3 class="text-xl font-semibold">Leanne</h3>
+          <p class="text-sm text-muted">Operations Manager</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Team Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 bg-gray-50 dark:bg-slate-800">
+    <h2 class="text-3xl font-bold mb-8">Research Team</h2>
+    <ul class="grid md:grid-cols-3 gap-6">
+      <li class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow">
+        <h3 class="font-semibold">Deb</h3>
+      </li>
+      <li class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow">
+        <h3 class="font-semibold">Lorelle</h3>
+      </li>
+      <li class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow">
+        <h3 class="font-semibold">Farah</h3>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Lab Team Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <h2 class="text-3xl font-bold mb-8">Lab Team</h2>
+    <div class="grid md:grid-cols-5 gap-6">
+      <div class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow flex flex-col items-center">
+        <img src={defaultImg.src} alt="Lab Team Member" class="w-24 h-24 rounded-full object-cover mb-2"/>
+        <p class="text-sm">Member 1</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow flex flex-col items-center">
+        <img src={defaultImg.src} alt="Lab Team Member" class="w-24 h-24 rounded-full object-cover mb-2"/>
+        <p class="text-sm">Member 2</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow flex flex-col items-center">
+        <img src={defaultImg.src} alt="Lab Team Member" class="w-24 h-24 rounded-full object-cover mb-2"/>
+        <p class="text-sm">Member 3</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow flex flex-col items-center">
+        <img src={defaultImg.src} alt="Lab Team Member" class="w-24 h-24 rounded-full object-cover mb-2"/>
+        <p class="text-sm">Member 4</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow flex flex-col items-center">
+        <img src={defaultImg.src} alt="Lab Team Member" class="w-24 h-24 rounded-full object-cover mb-2"/>
+        <p class="text-sm">Member 5</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research IT Team Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 bg-gray-50 dark:bg-slate-800">
+    <h2 class="text-3xl font-bold mb-8">Research IT Team</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow flex flex-col items-center">
+        <img src={defaultImg.src} alt="Research IT Member" class="w-24 h-24 rounded-full object-cover mb-2"/>
+        <p class="text-sm">IT Member 1</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-700 rounded-lg shadow flex flex-col items-center">
+        <img src={defaultImg.src} alt="Research IT Member" class="w-24 h-24 rounded-full object-cover mb-2"/>
+        <p class="text-sm">IT Member 2</p>
+      </div>
+    </div>
+  </section>
+  <!-- Alumni Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <h2 class="text-3xl font-bold mb-8">Alumni</h2>
+    <ul class="grid md:grid-cols-4 sm:grid-cols-2 gap-4">
+      <li class="p-3 bg-white dark:bg-slate-700 rounded shadow-sm text-center">
+        <span class="font-medium">Alumni Member 1</span>
+      </li>
+      <li class="p-3 bg-white dark:bg-slate-700 rounded shadow-sm text-center">
+        <span class="font-medium">Alumni Member 2</span>
+      </li>
+      <li class="p-3 bg-white dark:bg-slate-700 rounded shadow-sm text-center">
+        <span class="font-medium">Alumni Member 3</span>
+      </li>
+      <li class="p-3 bg-white dark:bg-slate-700 rounded shadow-sm text-center">
+        <span class="font-medium">Alumni Member 4</span>
+      </li>
+    </ul>
+  </section>
+</Layout>

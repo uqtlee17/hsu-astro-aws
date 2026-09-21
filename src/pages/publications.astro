@@ -1,0 +1,264 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import publications from '~/data/publications.json';
+
+import PublicationList from '~/components/hsu/PublicationList.astro';
+
+const metadata = {
+  title: 'Publications & Research Outputs',
+};
+
+// Data Processing
+const sortedPubs = publications.sort((a, b) => b.year - a.year);
+const featuredPubs = sortedPubs.filter((p) => p.isFeatured);
+
+const featuredItems = featuredPubs.map((pub) => ({
+  title: pub.title,
+  description: `${pub.authors}<br/><br/><strong class="text-primary">${pub.journal} (${pub.year})</strong><br/><br/><span class="text-sm">${pub.abstract}</span>`,
+  icon: 'tabler:book',
+  callToAction: {
+    text: 'View DOI &rarr;',
+    href: `https://doi.org/${pub.doi}`,
+    target: '_blank',
+  },
+}));
+
+// Collaboration Graph Data
+const collabCounts: Record<string, number> = {};
+sortedPubs.forEach((pub) => {
+  if (pub.collaborators) {
+    pub.collaborators.forEach((c) => {
+      collabCounts[c] = (collabCounts[c] || 0) + 1;
+    });
+  }
+});
+
+const geoDictionary: Record<string, { lat: number; lng: number; country: string }> = {
+  'University of Oxford': { lat: 51.752, lng: -1.2577, country: 'United Kingdom' },
+  'Harvard Medical School': { lat: 42.3384, lng: -71.1017, country: 'United States' },
+  'QIMR Berghofer': { lat: -27.4475, lng: 153.0286, country: 'Australia' },
+  "King's College London": { lat: 51.5115, lng: -0.116, country: 'United Kingdom' },
+  'University of Sydney': { lat: -33.8886, lng: 151.1873, country: 'Australia' },
+  UNSW: { lat: -33.9173, lng: 151.2313, country: 'Australia' },
+  'University of Southern California': { lat: 34.0224, lng: -118.2851, country: 'United States' },
+  'Vrije Universiteit Amsterdam': { lat: 52.333, lng: 4.8654, country: 'Netherlands' },
+  'University of Melbourne': { lat: -37.7963, lng: 144.9614, country: 'Australia' },
+  'Imperial College London': { lat: 51.4988, lng: -0.1749, country: 'United Kingdom' },
+  'Helmholtz Zentrum München': { lat: 48.2215, lng: 11.5947, country: 'Germany' },
+};
+
+const mapMarkers = Object.entries(collabCounts)
+  .map(([name, count]) => {
+    const geo = geoDictionary[name];
+    if (geo) {
+      return { name, count, lat: geo.lat, lng: geo.lng, country: geo.country };
+    }
+    return null;
+  })
+  .filter(Boolean);
+
+const uniqueCountries = new Set(mapMarkers.map((m) => m?.country));
+
+const mapData = JSON.stringify(mapMarkers);
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+  <HeroText
+    title="Publications & Research Outputs"
+    subtitle="A comprehensive record of HSU's contribution to clinical research, genomic studies, and biobanking methodology."
+  />
+
+  <!-- Featured Publications ******************* -->
+  {
+    featuredPubs.length > 0 && (
+      <Features2
+        title="Featured Publications"
+        subtitle="Highlighting some of our most impactful collaborative research and methodological papers."
+        columns={3}
+        items={featuredItems}
+      >
+        <Fragment slot="bg">
+          <div class="absolute inset-0 bg-blue-50 dark:bg-transparent" />
+        </Fragment>
+      </Features2>
+    )
+  }
+
+  <!-- Global Research Collaborations Map Section -->
+  <section class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Global Research Collaborations</h2>
+      <p class="text-muted">Explore our international network of joint publications and research partners.</p>
+    </div>
+
+    <!-- Map Container -->
+    <div
+      class="w-full bg-slate-50 dark:bg-slate-800 rounded-t-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden relative"
+    >
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+      />
+      <div id="collaboration-map" style="height: 500px; width: 100%;"></div>
+    </div>
+
+    <!-- Statistics Strip -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-0 bg-white dark:bg-slate-900 rounded-b-2xl shadow-lg border border-t-0 border-gray-100 dark:border-slate-700 text-center divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-slate-800"
+    >
+      <div class="p-8">
+        <div class="text-4xl font-bold text-primary mb-2">{uniqueCountries.size}</div>
+        <div class="text-sm font-semibold tracking-wide text-slate-500 uppercase">Countries</div>
+      </div>
+      <div class="p-8">
+        <div class="text-4xl font-bold text-primary mb-2">{Object.keys(collabCounts).length}</div>
+        <div class="text-sm font-semibold tracking-wide text-slate-500 uppercase">Collaborations</div>
+      </div>
+      <div class="p-8">
+        <div class="text-4xl font-bold text-primary mb-2">{sortedPubs.length}+</div>
+        <div class="text-sm font-semibold tracking-wide text-slate-500 uppercase">Publications</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Publications with Filter ******************* -->
+  <section class="relative px-4 sm:px-6 py-12 max-w-5xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Complete Publication Index</h2>
+      <p class="text-muted">
+        Browse our full list of publications. Use the filters below to find specific research areas.
+      </p>
+    </div>
+
+    <PublicationList items={publications} showFilters={true} />
+  </section>
+
+  <!-- CallToAction Widget *********** -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contact HSU',
+        href: '/contact',
+        icon: 'tabler:mail',
+      },
+    ]}
+  >
+    <Fragment slot="title"> Looking to partner on your next study? </Fragment>
+
+    <Fragment slot="subtitle">
+      Our team provides end-to-end support for complex clinical and genomic research. Reach out to discuss how HSU can
+      support your protocols.
+    </Fragment>
+  </CallToAction>
+</Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const buttons = document.querySelectorAll('.filter-btn') as NodeListOf<HTMLElement>;
+    const pubItems = document.querySelectorAll('.pub-item') as NodeListOf<HTMLElement>;
+    const yearGroups = document.querySelectorAll('.year-group') as NodeListOf<HTMLElement>;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Reset all buttons
+        buttons.forEach((b) => {
+          b.classList.remove('bg-primary', 'text-white', 'shadow-md');
+          b.classList.add('bg-slate-100', 'text-slate-700', 'shadow-sm', 'dark:bg-slate-800', 'dark:text-slate-300');
+        });
+
+        // Highlight clicked button
+        btn.classList.remove('bg-slate-100', 'text-slate-700', 'shadow-sm', 'dark:bg-slate-800', 'dark:text-slate-300');
+        btn.classList.add('bg-primary', 'text-white', 'shadow-md');
+
+        const tag = btn.getAttribute('data-tag');
+
+        // Filter items
+        pubItems.forEach((item) => {
+          if (tag === 'all') {
+            item.style.display = 'block';
+          } else {
+            const tags = item.getAttribute('data-tags')?.split(',') || [];
+            if (tag && tags.includes(tag)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          }
+        });
+
+        // Hide year groups that have no visible items
+        yearGroups.forEach((group) => {
+          let hasVisible = false;
+          group.querySelectorAll('.pub-item').forEach((i) => {
+            const itemElement = i as HTMLElement;
+            if (itemElement.style.display !== 'none') {
+              hasVisible = true;
+            }
+          });
+          group.style.display = hasVisible ? 'block' : 'none';
+        });
+      });
+    });
+  });
+</script>
+
+<script
+  is:inline
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""></script>
+<script is:inline define:vars={{ mapData }}>
+  document.addEventListener('astro:page-load', () => {
+    const mapDom = document.getElementById('collaboration-map');
+
+    // Only initialize if the element exists and hasn't been initialized already
+    if (mapDom && !mapDom._leaflet_id) {
+      // Center roughly between Australia and Europe
+      const map = L.map('collaboration-map', {
+        scrollWheelZoom: false, // Prevent scroll hijacking
+      }).setView([20, 90], 2);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20,
+      }).addTo(map);
+
+      const markers = JSON.parse(mapData);
+
+      markers.forEach((m) => {
+        // Size the circle based on publication count
+        const radius = Math.max(8, Math.min(25, 5 + m.count * 3));
+
+        const circle = L.circleMarker([m.lat, m.lng], {
+          color: '#1e3a8a',
+          fillColor: '#3b82f6',
+          fillOpacity: 0.6,
+          radius: radius,
+          weight: 2,
+        }).addTo(map);
+
+        const popupContent = `
+          <div style="text-align: center; font-family: sans-serif;">
+            <strong style="font-size: 14px; color: #1e3a8a;">${m.name}</strong><br/>
+            <span style="color: #64748b;">${m.country}</span><br/><br/>
+            <div style="background: #eff6ff; padding: 4px 8px; border-radius: 4px; font-weight: bold; color: #1d4ed8;">
+              ${m.count} Joint Publication${m.count > 1 ? 's' : ''}
+            </div>
+          </div>
+        `;
+
+        circle.bindPopup(popupContent);
+      });
+    }
+  });
+</script>

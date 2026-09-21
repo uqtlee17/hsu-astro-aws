@@ -1,0 +1,66 @@
+{
+  "unitCapabilities": [
+    {
+      "id": "cap-001",
+      "title": "End-to-end sample handling",
+      "description": "Sample receipt, DNA/RNA extraction, quality control, and biobank archiving.",
+      "icon": "tabler:flask"
+    },
+    {
+      "id": "cap-005",
+      "title": "Experienced project oversight",
+      "description": "Dedicated operational leads supporting complex, multi-site national and international consortia.",
+      "icon": "tabler:chart-arrows-vertical"
+    },
+    {
+      "id": "cap-004",
+      "title": "Biobanking capabilities",
+      "description": "Long-term cryogenic liquid nitrogen storage with continuous 24/7 temperature monitoring. GMP storage capabilities are coming soon.",
+      "icon": "tabler:snowflake"
+    },
+    {
+      "id": "cap-007",
+      "title": "Clinical Trials Support",
+      "description": "Comprehensive operational support for clinical trial logistics, time-sensitive sample processing, and strict protocol adherence.",
+      "icon": "tabler:stethoscope"
+    },
+    {
+      "id": "cap-008",
+      "title": "Custom Digital Data Capture",
+      "description": "Expertise in designing and building custom digital workflows, online questionnaires, and participant registries.",
+      "icon": "tabler:forms"
+    },
+    {
+      "id": "cap-002",
+      "title": "Secure research IT infrastructure",
+      "description": "Enterprise LIMS, encrypted databases, custom APIs, and participant portals.",
+      "icon": "tabler:database"
+    }
+  ],
+  "homePillars": [
+    {
+      "id": "pil-001",
+      "title": "Sample Collection & Processing",
+      "description": "Standardized processing protocols for blood, saliva, tissue, and plasma biospecimens.",
+      "icon": "tabler:droplet"
+    },
+    {
+      "id": "pil-002",
+      "title": "Research Governance & Ethics",
+      "description": "Streamlined compliance management for complex human research ethics approvals.",
+      "icon": "tabler:shield-check"
+    },
+    {
+      "id": "pil-003",
+      "title": "High-Throughput Biobanking",
+      "description": "State-of-the-art cryogenic liquid nitrogen storage tracking over 150,000 samples.",
+      "icon": "tabler:snowflake"
+    },
+    {
+      "id": "pil-004",
+      "title": "Participant Portals & IT",
+      "description": "Custom web applications for online consent, health surveys, and participant engagement.",
+      "icon": "tabler:devices-laptop"
+    }
+  ]
+}

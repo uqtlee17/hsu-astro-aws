@@ -1,0 +1,373 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Brands from '~/components/widgets/Brands.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import AlternatingSteps from '~/components/widgets/AlternatingSteps.astro';
+
+
+import lab1Image from '~/assets/images/lab/lab1.png';
+import hsuTeamImage from '~/assets/images/lab/HSU_TEAM.jpg';
+import CapabilityGrid from '~/components/hsu/CapabilityGrid.astro';
+import capabilities from '~/data/capabilities.json';
+import PurposeValues from '~/components/widgets/PurposeValues.astro';
+
+
+const metadata = {
+  title: 'About Us — Human Studies Unit (HSU)',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Section ******************* -->
+  <Hero2
+    image={{
+      src: lab1Image,
+      alt: 'Human Studies Unit Research Laboratory',
+      // removed opacity and pointer-events to display image normally
+    }}
+    bg='<div class="absolute inset-0 bg-gradient-to-b from-blue-50/40 via-white to-transparent dark:from-slate-900/60 dark:via-slate-900 dark:to-transparent"></div>'
+  >
+    <Fragment slot="title"> About the Human Studies Unit </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="block mb-2 mt-2 text-xl font-bold text-secondary dark:text-blue-300"
+        >Pioneering Genomic Discovery & Precision Health Research</span
+      >
+      <p class="text-slate-800 dark:text-slate-200 text-base sm:text-lg leading-relaxed">
+        Established at the Institute for Molecular Bioscience (IMB) at The University of Queensland, the Human Studies
+        Unit (HSU) serves as an end-to-end operational hub bridging clinical participants, biological specimens,
+        high-throughput genomics, and secure data infrastructure to advance human research.
+      </p>
+    </Fragment>
+
+  </Hero2>
+
+  <PurposeValues bg="bg-blue-50/50 dark:bg-slate-800" />
+
+  <!-- Why Partner With HSU (CapabilityGrid Component) ******************* -->
+  <CapabilityGrid
+    id="capabilities"
+    title="Why Partner With HSU"
+    subtitle="We provide the operational backbone for complex clinical and genomic research."
+    columns={3}
+    items={capabilities.unitCapabilities}
+  />
+
+  <!-- History & Milestones Section (NovaLab History Style) ******************* -->
+  <section class="relative bg-blue-50/50 dark:bg-slate-900 py-10 md:py-14" id="history">
+    <AlternatingSteps
+      tagline="OUR JOURNEY"
+      title="A History of Accelerating Genomic Research"
+      subtitle="Over a decade of building infrastructure, expanding cohorts, and supporting breakthrough biomedical studies."
+      items={[
+        {
+          title: '2014 — Unit Establishment',
+          description:
+            'Founded within the Institute for Molecular Bioscience to address the growing need for specialised human sample management and genomic workflows in Queensland.',
+          icon: 'tabler:flag',
+        },
+        {
+          title: '2016 — Unit Move to IMB',
+          description:
+            'Relocated operations to the Institute for Molecular Bioscience (IMB) at UQ, integrating laboratory facilities directly with cutting-edge genomics research.',
+          icon: 'tabler:building-hospital',
+        },
+        {
+          title: '2016 — HSU Research Portal \u0026 Questionnaire Platform Release',
+          description:
+            'Released dedicated digital research portal and online questionnaire platform for streamlined participant onboarding and data collection.',
+          icon: 'tabler:forms',
+        },
+        {
+          title: '2017 — Cryogenic Biobank & LIMS Expansion',
+          description:
+            'Deployed automated liquid handling, custom Laboratory Information Management System (LIMS), and liquid nitrogen biobanking storage capable of tracking over 150,000 specimens.',
+          icon: 'tabler:snowflake',
+        },
+
+
+        {
+          title: '2022 — Salsa Explorer Launch',
+          description:
+            'Launched Salsa Explorer software platform for enhanced genomic data query, sample metadata tracking, and researcher access.',
+          icon: 'tabler:database',
+        },
+        {
+          title: '2023 — CTRNet Certification',
+          description:
+            'HSU achieved international biobanking certification from the Canadian Tissue Repository Network (CTRNet).',
+          icon: 'tabler:certificate',
+        },
+        {
+          title: '2024 — WIT2024 Awards Future Focused Business Achiever Finalists',
+          description:
+            'Recognised as Finalists for Future Focused Business Achiever at the 2024 Women in Technology (WIT) Awards.',
+          icon: 'tabler:trophy',
+        },
+        {
+          title: '2026 — Transformation of First Cell Lines',
+          description:
+            'Pioneered cell line transformation capabilities to support longitudinal cellular models and functional genomics research.',
+          icon: 'tabler:microscope',
+        },
+      ]}
+    />
+  </section>
+
+  <!-- Quality, Governance & Infrastructure Standards ******************* -->
+  <Features2
+    tagline="STANDARDS & COMPLIANCE"
+    title="Uncompromising Quality & Governance"
+    subtitle="We adhere to rigorous international benchmarks to ensure scientific reproducibility and participant data protection."
+    columns={2}
+    items={[
+      {
+        title: 'Strict Standard Operating Procedures (SOPs)',
+        description:
+          'Validated extraction and QC pipelines with high-throughput automated liquid handlers ensuring consistent yield and DIN/RIN metrics.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Ethical Governance & Consent Management',
+        description:
+          'Full compliance with NHMRC National Statement guidelines, HREC ethical approvals, participant re-contact protocols, and dynamic consent handling.',
+        icon: 'tabler:shield-lock',
+      },
+      {
+        title: 'Enterprise Data Security & Encryption',
+        description:
+          'ISO 27001-aligned infrastructure featuring de-identified sample mapping, role-based access controls, and end-to-end encrypted storage.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Continuous Monitoring & Disaster Preparedness',
+        description:
+          '24/7 automated telemetry for liquid nitrogen and freezer banks with redundant power systems and rapid response protocols.',
+        icon: 'tabler:activity-heartbeat',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-slate-900"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Certifications Highlight Bar -->
+  <section class="bg-blue-50 dark:bg-slate-800/50 border-t border-b border-blue-100 dark:border-slate-700/50 py-6 mb-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-center items-center gap-8 md:gap-20 text-center">
+      <div class="flex items-center gap-4">
+        <img src="https://www.ctrnet.ca/wp-content/uploads/2020/01/CTRNet_Tissue_logo-e1578946130687.png" alt="CTRNet Certified" class="h-10 md:h-12 object-contain" />
+        <span class="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide">CTRNet Certified (2023)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <img src="https://mygreenlab.org/wp-content/themes/sc_theme/dist/img/logo.svg" alt="Green Lab Certificate" class="h-10 md:h-12 object-contain" />
+        <span class="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide">Green Lab Certification (In Progress, 2026)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership & Academic Direction ******************* -->
+  <section class="relative bg-blue-50/70 dark:bg-slate-900 py-10 md:py-14" id="leadership">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <p class="text-xs sm:text-sm text-secondary dark:text-blue-200 font-bold tracking-wide uppercase mb-2">
+          EXECUTIVE LEADERSHIP
+        </p>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-heading leading-tight tracking-tight">
+          Guided by World-Class Expertise
+        </h2>
+        <div class="w-16 h-1 bg-primary mx-auto my-4 rounded-full"></div>
+        <p class="text-sm sm:text-base text-muted dark:text-slate-300">
+          Our leadership team brings together decades of experience across genomic medicine, clinical trial operations,
+          biobanking governance, and research IT systems.
+        </p>
+      </div>
+      <!-- Leadership Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Leader 1: Anjali Henders -->
+        <div
+          class="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-md shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-700/50 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5"
+        >
+          <div class="relative h-60 overflow-hidden bg-slate-100 dark:bg-slate-700">
+            <img
+              src="https://yengolab.org/wp-content/uploads/2025/05/Anjali_Henders2_PREFERRED_wide-scaled-e1747894669419.jpg"
+              alt="Anjali Henders"
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60">
+            </div>
+          </div>
+          <div class="p-6 flex-grow flex flex-col justify-between text-left">
+            <div>
+              <h3 class="text-xl font-bold font-heading text-heading mb-1">Anjali Henders</h3>
+              <p class="text-xs font-bold text-secondary dark:text-blue-300 uppercase tracking-widest mb-3">
+                HUMAN STUDIES MANAGER
+              </p>
+              <p class="text-xs sm:text-sm text-muted dark:text-slate-300 leading-relaxed">
+                Anjali has over 15 years of experience managing complex, large-scale research programmes and specialises
+                in facilitating and managing interdisciplinary collaborations and consortia.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leader 2: Leanne Wallace -->
+        <div
+          class="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-md shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-700/50 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5"
+        >
+          <div class="relative h-60 overflow-hidden bg-slate-100 dark:bg-slate-700">
+            <img
+              src="https://hsu.imb.uq.edu.au/sites/default/files/hsu_Leanne_Wallace.jpg"
+              alt="Leanne Wallace"
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60">
+            </div>
+          </div>
+          <div class="p-6 flex-grow flex flex-col justify-between text-left">
+            <div>
+              <h3 class="text-xl font-bold font-heading text-heading mb-1">Leanne Wallace</h3>
+              <p class="text-xs font-bold text-secondary dark:text-blue-300 uppercase tracking-widest mb-3">
+                LABORATORY MANAGER
+              </p>
+              <p class="text-xs sm:text-sm text-muted dark:text-slate-300 leading-relaxed">
+                Leanne has over 17 years of experience managing human biological collections for large-scale research
+                programmes, with expertise in genomics, sample management, and establishing wet-lab capabilities for
+                biological sample collection.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3rd Card: Professional Team CTA Card -->
+        <div
+          class="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-md shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-700/50 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5"
+        >
+          <div class="relative h-60 overflow-hidden bg-slate-100 dark:bg-slate-700">
+            <img
+              src={hsuTeamImage.src}
+              alt="Our Multidisciplinary Team"
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent opacity-80">
+            </div>
+          </div>
+          <div class="p-6 flex-grow flex flex-col justify-between text-left">
+            <div>
+              <h3 class="text-xl font-bold font-heading text-heading mb-1">Our Full Team</h3>
+              <p class="text-xs font-bold text-secondary dark:text-blue-300 uppercase tracking-widest mb-2">
+                MULTIDISCIPLINARY TEAM
+              </p>
+              <p class="text-xs sm:text-sm text-muted dark:text-slate-300 leading-relaxed mb-4">
+                Discover the dedicated researchers, technical experts, and staff who power our laboratory operations,
+                data systems, and research initiatives.
+              </p>
+            </div>
+            <div>
+              <a
+                href="/our-team"
+                class="inline-flex items-center justify-center bg-primary hover:bg-secondary text-white font-bold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                Meet the Full Team &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advisory Panel ******************* -->
+  <Features2
+    tagline="ADVISORY PANEL"
+    title="Scientific Advisory Board"
+    subtitle="Our advisory panel provides strategic guidance to ensure our research infrastructure meets the evolving needs of the global scientific community."
+    columns={4}
+    items={[
+      { title: 'Prof Naomi Wray', description: 'University of Oxford <br /> The University of Queensland (IMB)' },
+      { title: 'Prof Allan McRae', description: 'The University of Queensland (IMB)' },
+      { title: 'Prof Grant Montgomery', description: 'The University of Queensland (IMB)' },
+      { title: 'Prof Jenny Stow', description: 'The University of Queensland (IMB)' },
+      { title: 'Prof Jake Gratten', description: 'Mater Research Institute <br /> The University of Queensland' },
+      { title: 'Prof Marc Ruitenberg', description: 'Mater Research <br /> The University of Queensland' },
+      { title: 'Assoc Prof Shyuan (Shu) Ngo', description: 'The University of Queensland (AIBN)' },
+    ]}
+    classes={{
+      container: 'py-6 md:py-8 lg:py-10',
+      headline: { container: 'mb-4 md:mb-6' },
+      items: {
+        panel: 'p-4 bg-transparent shadow-none border-none',
+        title: 'text-base font-bold mb-1',
+        description: 'text-xs text-muted leading-tight',
+      }
+    }}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-slate-900"></div>
+    </Fragment>
+  </Features2>
+
+
+  <!-- Partners & Collaborators Logos ******************* -->
+  <section id="partners">
+    <Brands
+      title="Partners & Collaborators"
+      subtitle="We work with leading institutes and networks to advance scientific discovery."
+      classes={{ container: 'max-w-full px-4 md:px-8' }}
+      icons={[]}
+      images={[
+        { src: 'https://www.drupal.org/files/uq.png', alt: 'University of Queensland' },
+        {
+          src: 'https://images.seeklogo.com/logo-png/25/2/university-of-sydney-logo-png_seeklogo-250838.png',
+          alt: 'University of Sydney',
+        },
+        { src: 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Logo_of_the_QIMR.png', alt: 'QIMR Berghofer' },
+        {
+          src: 'https://images.seeklogo.com/logo-png/49/1/the-university-of-melbourne-logo-png_seeklogo-490645.png',
+          alt: 'The University of Melbourne',
+        },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+        { src: 'https://placehold.co/400x160/f8fafc/64748b?text=Partner+Logo', alt: 'Placeholder' },
+      ]}
+    >
+      <Fragment slot="bg">
+        <div class="absolute inset-0 bg-white dark:bg-slate-900"></div>
+      </Fragment>
+    </Brands>
+  </section>
+
+  <!-- CallToAction Widget *********** -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Contact Leadership',
+        href: '/contact',
+        icon: 'tabler:mail',
+      },
+      {
+        variant: 'secondary',
+        text: 'Explore Our Services',
+        href: '/services',
+        icon: 'tabler:microscope',
+      },
+    ]}
+  >
+    <Fragment slot="title"> Ready to Collaborate on Your Next Study? </Fragment>
+    <Fragment slot="subtitle">
+      Contact our team to discuss study design, sample processing, biobanking services, or custom genomic pipelines.
+    </Fragment>
+  </CallToAction>
+</Layout>

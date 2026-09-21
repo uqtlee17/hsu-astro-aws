@@ -1,0 +1,236 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+
+import heroServicesImage from '~/assets/images/hero-services.png';
+import HSUServices from '~/components/widgets/HSUServices.astro';
+
+const metadata = {
+  title: 'Services — Human Studies Unit (HSU)',
+  description:
+    'Explore HSU end-to-end human research services including laboratory sample management, biobanking, governance, and research IT infrastructure.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Section ******************* -->
+  <Hero2
+    tagline="OUR SERVICES"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Consult Our Team',
+        href: '/contact',
+      },
+      { text: 'Explore Capabilities', href: '#pillars' },
+    ]}
+    image={{
+      src: heroServicesImage,
+      alt: 'Human Research Services at HSU Laboratory',
+    }}
+    bg='<div class="absolute inset-0 bg-white dark:bg-transparent"></div>'
+  >
+    <Fragment slot="title"> End-to-End Human Research Services </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="block mb-2 mt-3 text-xl font-bold text-secondary dark:text-blue-300">
+        Integrating Biological Specimen Management, High-Throughput Genomics & Research IT
+      </span>
+      <p class="text-slate-800 dark:text-slate-200">
+        We provide complete operational support for clinical and biomedical studies—from cohort recruitment and sample
+        collection to automated DNA/RNA extraction, cryogenic archiving, and secure data infrastructure.
+      </p>
+    </Fragment>
+
+  </Hero2>
+
+  <HSUServices />
+
+  <!-- Detailed Service Features Grid (Features2) ************** -->
+  <Features2
+    title="Comprehensive Laboratory & Research Capabilities"
+    subtitle="Tailored operational solutions designed for Chief Investigators, national consortia, and clinical trial leads."
+    columns={3}
+    items={[
+      {
+        title: 'Biospecimen Processing & QC',
+        description:
+          'High-precision automated DNA/RNA extraction from blood, saliva, tissue, and plasma with Qubit, NanoDrop, and TapeStation verification.',
+        icon: 'tabler:flask',
+      },
+      {
+        title: 'Cryogenic Liquid Nitrogen Biobank',
+        description:
+          'State-of-the-art vapor-phase liquid nitrogen archiving with 24/7 automated telemetry and redundant power systems.',
+        icon: 'tabler:snowflake',
+      },
+      {
+        title: 'Custom LIMS & Specimen Tracking',
+        description:
+          'Enterprise OpenSpecimen LIMS providing 100% audit-ready chain-of-custody tracking for every tube and aliquoted sample.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Participant Portals & Online Surveys',
+        description:
+          'Tailored participant onboarding web applications, digital consent workflows, and secure online questionnaire platforms.',
+        icon: 'tabler:device-laptop',
+      },
+      {
+        title: 'Ethics & HREC Governance Advisory',
+        description:
+          'Expert guidance on multi-site ethics applications, consent form frameworks, and NHMRC regulatory compliance.',
+        icon: 'tabler:gavel',
+      },
+      {
+        title: 'Genomic Screening & Array Workflows',
+        description:
+          'Genomic sample preparation, array screening logistics, and pipeline management for large-scale population studies.',
+        icon: 'tabler:dna-2',
+      },
+    ]}
+  />
+
+  <!-- Main Features (Content Widget) **************** -->
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Automated Processing & High Yield',
+        description:
+          'Robotic liquid handlers minimize manual variance, guaranteeing consistent DNA/RNA yield and DIN/RIN quality metrics.',
+        icon: 'tabler:wand',
+      },
+      {
+        title: 'Cryptographic De-identification',
+        description:
+          'Sample barcodes and patient data are linked via secure cryptographic keys, protecting PII under strict privacy standards.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Real-Time Sample Telemetry',
+        description:
+          'Continuous 24/7 temperature monitoring across all cryogenic tanks and freezers with instant automated alerts.',
+        icon: 'tabler:activity-heartbeat',
+      },
+      {
+        title: 'Integrated Research IT & Cloud APIs',
+        description:
+          'Direct API interfaces and custom portal dashboards allowing researchers to query metadata and track sample status live.',
+        icon: 'tabler:api',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
+      alt: 'HSU Laboratory Automation Features',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Platform Features</h3>
+      <p class="text-muted dark:text-slate-300">
+        Engineered for precision and scale, HSU’s integrated platform turns raw biospecimens into research-ready data.
+      </p>
+    </Fragment>
+  </Content>
+
+  <!-- Benefits (Content Widget) **************** -->
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Time & Logistics Efficiency',
+        description:
+          'Streamlined nationwide participant kit distribution and automated intake reduce operational overhead for research teams.',
+        icon: 'tabler:clock',
+      },
+      {
+        title: 'Certified Operational Quality',
+        description:
+          'CTRNet international biobanking certification ensures biospecimen integrity accepted by top global journals and funders.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Cost-Effective Consortia Support',
+        description:
+          'Shared core infrastructure lowers per-sample costs for multi-site studies and collaborative research grants.',
+        icon: 'tabler:coin',
+      },
+      {
+        title: 'Turnkey Governance & Compliance',
+        description:
+          'Pre-approved ethics templates, dynamic consent tracking, and NHMRC alignment accelerate project startup timelines.',
+        icon: 'tabler:shield-check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+      alt: 'HSU Operational Benefits',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Partner Benefits</h3>
+      <p class="text-muted dark:text-slate-300">
+        Why Chief Investigators and national research consortia choose HSU as their operational partner.
+      </p>
+    </Fragment>
+  </Content>
+
+  <!-- Testimonials Widget (Kept as reference structure for real customer feedback) *********** -->
+  <Testimonials
+    title="Words from Real Collaborators"
+    subtitle="Feedback from research partners and chief investigators supported by the Human Studies Unit."
+    testimonials={[
+      {
+        testimonial: `HSU provided seamless, high-integrity laboratory and computational workflows that allowed our national study to scale smoothly across thousands of participants.`,
+        name: 'Emily Kennedy',
+        job: 'Lead Investigator',
+        image: {
+          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=930&q=80',
+          alt: 'Emily Kennedy Image',
+        },
+      },
+      {
+        testimonial: `The custom participant portal and OpenSpecimen LIMS integration transformed how we manage sample tracking and survey data. The CTRNet certification gave our ethics committee complete peace of mind.`,
+        name: 'Sarah Hansen',
+        job: 'Clinical Genetics Researcher',
+        image: {
+          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+          alt: 'Sarah Hansen Image',
+        },
+      },
+      {
+        testimonial: `Working with HSU's dedicated operational leads ensured our complex multi-site cohort maintained flawless sample quality control metrics throughout the study lifetime.`,
+        name: 'Mark Wilkinson',
+        job: 'Biomedical Program Director',
+        image: {
+          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&auto=format&fit=crop&w=824&q=80',
+          alt: 'Mark Wilkinson Image',
+        },
+      },
+    ]}
+  />
+
+  <!-- CallToAction / Partner With HSU Team Widget *********** -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get In Touch With Our Team',
+        href: '/contact',
+        icon: 'tabler:mail',
+      },
+      {
+        text: 'Meet Our Leadership',
+        href: '/about#leadership',
+        icon: 'tabler:users',
+      },
+    ]}
+    title="Partner With HSU's Expert Team"
+    subtitle="Whether you are planning a new clinical trial, launching a cohort study, or seeking certified biobanking infrastructure, our team is here to support your research."
+  />
+</Layout>

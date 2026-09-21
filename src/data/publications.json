@@ -1,0 +1,74 @@
+[
+  {
+    "id": "pub-001",
+    "title": "Genome-wide association analyses identify 44 risk variants and refine the genetic architecture of major depression",
+    "authors": "Wray NR, Ripke S, Mattheisen M, et al., Henders AK, et al.",
+    "journal": "Nature Genetics",
+    "year": 2018,
+    "doi": "10.1038/s41588-018-0059-2",
+    "tags": ["genetics", "depression", "gwas"],
+    "isFeatured": true,
+    "abstract": "We conducted a meta-analysis of genome-wide association studies (GWAS) of major depression, identifying 44 independent and significant loci.",
+    "collaborators": ["University of Oxford", "Harvard Medical School", "QIMR Berghofer", "King's College London"]
+  },
+  {
+    "id": "pub-002",
+    "title": "The Australian Genetics of Depression Study: Study Description and Sample Characteristics",
+    "authors": "Byrne EM, ..., Henders AK, Wray NR, Martin NG",
+    "journal": "Frontiers in Psychiatry",
+    "year": 2020,
+    "doi": "10.3389/fpsyt.2020.00325",
+    "tags": ["depression", "biobanking", "cohort"],
+    "isFeatured": true,
+    "abstract": "The Australian Genetics of Depression Study was established to identify genetic and environmental factors associated with depression and treatment response.",
+    "collaborators": ["QIMR Berghofer", "University of Sydney", "UNSW"]
+  },
+  {
+    "id": "pub-003",
+    "title": "Genetic architecture of human cortical thickness",
+    "authors": "Grasby KL, Jahanshad N, Painter JN, ..., Henders AK, et al.",
+    "journal": "Nature Communications",
+    "year": 2020,
+    "doi": "10.1038/s41467-020-14454-2",
+    "tags": ["genetics", "gwas", "neuroimaging"],
+    "isFeatured": false,
+    "abstract": "Here we report a meta-analysis of GWAS of cortical thickness and surface area in 33,992 individuals of European descent.",
+    "collaborators": ["University of Southern California", "Vrije Universiteit Amsterdam", "QIMR Berghofer"]
+  },
+  {
+    "id": "pub-004",
+    "title": "The Queensland Twin Adolescent Brain (QTIM) Study",
+    "authors": "Wright MJ, Ames D, ..., Henders AK, et al.",
+    "journal": "Twin Research and Human Genetics",
+    "year": 2021,
+    "doi": "10.1017/thg.2021.2",
+    "tags": ["cohort", "genetics", "neuroimaging"],
+    "isFeatured": false,
+    "abstract": "A longitudinal study to understand the genetic and environmental influences on brain structure and function during adolescence.",
+    "collaborators": ["QIMR Berghofer", "University of Melbourne"]
+  },
+  {
+    "id": "pub-005",
+    "title": "Epigenome-wide association study of body mass index, and the adverse outcomes of adiposity",
+    "authors": "Wahl S, Drong A, Lehne B, ..., Henders AK, et al.",
+    "journal": "Nature",
+    "year": 2017,
+    "doi": "10.1038/nature20784",
+    "tags": ["epigenetics", "gwas", "metabolism"],
+    "isFeatured": false,
+    "abstract": "We identify and replicate 187 genetic loci with differential DNA methylation associated with BMI, shedding light on the metabolic consequences of adiposity.",
+    "collaborators": ["Imperial College London", "Helmholtz Zentrum München", "University of Oxford"]
+  },
+  {
+    "id": "pub-006",
+    "title": "Large-scale collection of biospecimens in a geographically dispersed population: best practices",
+    "authors": "Henders AK, Wallace L, ..., Wray NR",
+    "journal": "Biopreservation and Biobanking",
+    "year": 2022,
+    "doi": "10.1089/bio.2021.0112",
+    "tags": ["biobanking", "methodology", "cohort"],
+    "isFeatured": true,
+    "abstract": "An overview of the logistical and operational frameworks required to collect, process, and store biospecimens safely from across Australia.",
+    "collaborators": ["QIMR Berghofer", "University of Sydney"]
+  }
+]
