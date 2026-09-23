@@ -14,6 +14,8 @@ const metadata = {
 
   <HeroText tagline="Contact" title="Let's Connect!" />
 
+  <div id="formStatus" style="text-align: center; color: #d97706; font-size: 1.2rem; margin-top: 2rem; min-height: 1.5rem;"></div>
+
   <ContactUs
     id="form"
     title="Drop us a message today!"
@@ -32,6 +34,7 @@ const metadata = {
     ]}
     textarea={{
       label: 'Message',
+      name: 'message',
     }}
     disclaimer={{
       label:
@@ -77,3 +80,47 @@ const metadata = {
     ]}
   />
 </Layout>
+
+// This stops the page from refreshing and is the API to AWS (sends data to AWS API Gateway)
+<script>
+  // Find the form and the status text box on the page
+  const form = document.getElementById('form');
+  const statusDiv = document.getElementById('formStatus');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Stop the page from refreshing
+
+      // FormData automatically grabs any input that has a 'name' attribute
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      statusDiv.innerText = "Sending message...";
+      statusDiv.style.color = "#d97706"; // Orange
+
+      try {
+        // Replace with your actual API Gateway Invoke URL + /contact
+        const response = await fetch('https://8a8xhcca8c.execute-api.us-east-1.amazonaws.com/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          statusDiv.innerText = "Message sent successfully!";
+          statusDiv.style.color = "green";
+          form.reset(); // Clear the form
+        } else {
+          statusDiv.innerText = "Failed to send. Please try again.";
+          statusDiv.style.color = "red";
+        }
+      } catch (error) {
+        console.error(error);
+        statusDiv.innerText = "An error occurred while sending.";
+        statusDiv.style.color = "red";
+      }
+    });
+  }
+</script>
