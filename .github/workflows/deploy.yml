@@ -32,6 +32,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::623174465163:role/Deploy-S3-CloudFront-Role
           aws-region: ${{ vars.AWS_REGION }}
+          audience: sts.amazonaws.com 
 
       - name: Sync files to S3
         run: |
